@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.zhangshuo.senior1.week1.dao.GoodsDao">
+  	<select id="getList" resultType="Goods">
+  		select g.*,b.bname,k.kname from tb_goods g LEFT JOIN tb_brand b on g.bid=b.bid
+          LEFT JOIN tb_goodskind k on k.kid=g.kid
+          <where>
+          	<if test="gname != null and gname != ''">
+          		gname like concat('%',#{gname},'%')
+          	</if>
+          </where>
+  	</select>
+  	<insert id="add">
+  		insert into tb_goods set gname=#{gname},gename=#{gename},bid=#{bid},kid=#{kid},size=#{size},price=#{price},num=#{num},biaoqian=#{biaoqian},image=#{image}
+  	</insert>
+  	<update id="update">
+  		update tb_goods set gname=#{gname},gename=#{gename},bid=#{bid},kid=#{kid},size=#{size},price=#{price},num=#{num},biaoqian=#{biaoqian},image=#{image} where gid=#{gid}
+  	</update>
+  </mapper>
